@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Data Graph - MPG for All Cars</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .back-btn {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Car Data Graph</h1>
+<p>View MPG of all cars.</p>
+
+<div class="container">
+    <canvas id="mpgGraph"></canvas>
+</div>
+
+
+<div>
+    <button class="back-btn" onclick="window.location.href='miniproject.html'">Back to Cars</button>
+</div>
+
+<script>
+
+const cars = [
+    {title: "Honda Civic", category: "Economy", price: 30, description: "Compact car with excellent fuel efficiency.", image: "hondacivic.jpg", rating: 4.2, mpg: 33},
+    {title: "Nissan Altima", category: "Economy", price: 40, description: "Sedan with advanced features and great comfort.", image: "nissanaltima.jpg", rating: 4.5, mpg: 30},
+    {title: "Nissan Maxima", category: "Economy", price: 70, description: "Luxury sedan with high-end features and style.", image: "nissanmaxima.jpg", rating: 4.6, mpg: 25},
+    {title: "Denali", category: "SUV", price: 150, description: "Luxury SUV with ample space and premium features.", image: "DenaliSuv.jpg", rating: 4.8, mpg: 18},
+    {title: "Dodge Durango", category: "SUV", price: 80, description: "Family-friendly SUV with great space and comfort.", image: "durango.jpg", rating: 4.4, mpg: 22},
+    {title: "Mustang", category: "Sports", price: 100, description: "Muscle car with powerful engine and iconic design.", image: "mustang.jpg", rating: 4.7, mpg: 15, zeroTo60: "4.5s"},
+    {title: "Camaro", category: "Sports", price: 120, description: "Sporty and stylish coupe with top-tier performance.", image: "camaro.jpg", rating: 4.9, mpg: 17, zeroTo60: "4.0s"},
+    {title: "Challenger", category: "Sports", price: 120, description: "Sporty and stylish coupe with top-tier performance.", image: "challengerr.jpg", rating: 4.9, mpg: 16, zeroTo60: "4.3s"},
+    {title: "BMW X1", category: "Luxury", price: 180, description: "High-performance truck with luxurious features and power.", image: "BMW.jpg", rating: 4.8, mpg: 24},
+    {title: "Audi A7", category: "Luxury", price: 90, description: "Sleek and stylish luxury sedan with cutting-edge technology.", image: "https://via.placeholder.com/300x200?text=Audi+A7", rating: 4.8, mpg: 28}
+];
+
+
+const mpgData = [];
+const carLabels = [];
+
+
+cars.forEach(car => {
+    carLabels.push(car.title);
+    mpgData.push(car.mpg);
+});
+
+
+const ctx = document.getElementById('mpgGraph').getContext('2d');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: carLabels,
+        datasets: [{
+            label: 'MPG (All Cars)',
+            data: mpgData,
+            backgroundColor: 'rgba(52, 152, 219, 0.6)',
+            borderColor: 'rgba(52, 152, 219, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'top'
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>

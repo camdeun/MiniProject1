@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Cars 0-60 Time</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .back-btn {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Sports Cars 0-60 Time</h1>
+<p>View the bar graph for the 0-60 time of each sports car in seconds.</p>
+
+<div class="container">
+    <canvas id="sportsCarGraph"></canvas>
+</div>
+
+
+<div>
+    <button class="back-btn" onclick="window.location.href='miniproject.html'">Back to Cars</button>
+</div>
+
+<script>
+
+const cars = [
+    {title: "Mustang", category: "Sports", price: 100, description: "Muscle car with powerful engine and iconic design.", image: "mustang.jpg", rating: 4.7, mpg: 15, zeroTo60: "4.5s"},
+    {title: "Camaro", category: "Sports", price: 120, description: "Sporty and stylish coupe with top-tier performance.", image: "camaro.jpg", rating: 4.9, mpg: 17, zeroTo60: "4.0s"},
+    {title: "Challenger", category: "Sports", price: 120, description: "Sporty and stylish coupe with top-tier performance.", image: "challengerr.jpg", rating: 4.9, mpg: 16, zeroTo60: "4.3s"}
+];
+
+
+const zeroTo60Data = [];
+const carLabels = [];
+
+
+cars.forEach(car => {
+    carLabels.push(car.title);
+    zeroTo60Data.push(parseFloat(car.zeroTo60.replace('s', '')));
+});
+
+
+const ctx = document.getElementById('sportsCarGraph').getContext('2d');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: carLabels,
+        datasets: [{
+            label: '0-60 Time (Seconds)',
+            data: zeroTo60Data,
+            backgroundColor: 'rgba(231, 76, 60, 0.6)',
+            borderColor: 'rgba(231, 76, 60, 1)', 
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Time (Seconds)'
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'top'
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>

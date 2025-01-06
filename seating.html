@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seating Capacity</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .back-btn {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Seating Capacity for Cars</h1>
+<p>view the seating capacity of various cars.</p>
+
+<div class="container">
+
+    <canvas id="seatingCapacityGraph"></canvas>
+</div>
+
+<div>
+    <button class="back-btn" onclick="window.location.href='miniproject.html'">Back to Cars</button>
+</div>
+
+<script>
+const cars = [
+    {title: "Honda Civic", seatingCapacity: 5},
+    {title: "Nissan Altima", seatingCapacity: 5},
+    {title: "Nissan Maxima", seatingCapacity: 5},
+    {title: "Denali", seatingCapacity: 7},
+    {title: "Dodge Durango", seatingCapacity: 7},
+    {title: "Mustang", seatingCapacity: 4},
+    {title: "Camaro", seatingCapacity: 4},
+    {title: "Challenger", seatingCapacity: 4},
+    {title: "BMW X1", seatingCapacity: 5},
+    {title: "Audi A7", seatingCapacity: 5}
+];
+
+
+const carLabels = [];
+const seatingCapacityData = [];
+
+
+cars.forEach(car => {
+    carLabels.push(car.title);
+    seatingCapacityData.push(car.seatingCapacity);
+});
+
+
+const graphData = {
+    labels: carLabels,
+    datasets: [
+        {
+            label: 'Seating Capacity',
+            data: seatingCapacityData,
+            backgroundColor: 'rgba(46, 204, 113, 0.6)',
+            borderColor: 'rgba(46, 204, 113, 1)',
+            borderWidth: 1
+        }
+    ]
+};
+
+
+const ctx = document.getElementById('seatingCapacityGraph').getContext('2d');
+const seatingCapacityGraph = new Chart(ctx, {
+    type: 'bar',  
+    data: graphData,
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'top'
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
